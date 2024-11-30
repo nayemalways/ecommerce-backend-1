@@ -8,8 +8,8 @@ const DataSchema = mongoose.Schema(
     {timestamps: true, versionKey: false}
 )
 
-const categoryModel = mongoose.model('categories', DataSchema);
+const CategoryModel = mongoose.model('categories', DataSchema);
 
 
 // Export Data Model
-export default categoryModel;
+export default CategoryModel;
