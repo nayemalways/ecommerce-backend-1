@@ -1,6 +1,6 @@
 use('MERN_Ecommerce(pre-rec)')
 
-db.createCollection('invoice')
+db.createCollection('PaymentSettingsModel')
  
 
 // db.products.insert({
