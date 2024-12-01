@@ -1,6 +1,6 @@
 use('MERN_Ecommerce(pre-rec)')
 
-db.createCollection('reviews')
+db.createCollection('invoice')
  
 
 // db.products.insert({
