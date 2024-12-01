@@ -1,11 +1,6 @@
 use('MERN_Ecommerce(pre-rec)')
 
-db.brands.insertOne(
-  {
-    brandName: "Samsung S23 Ultra",
-    brandImg:  "Samsung phone"
-  }
-)
+db.createCollection('carts')
  
 
 // db.products.insert({
