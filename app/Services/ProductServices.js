@@ -26,9 +26,13 @@ export const BrandListService = async () => {
     }
 }
 
+
+
+
+
 export const CategoryListService = async (req) => {
     try {
-        // Find Brand Data
+        // Category Data
         const data = await  CategoryModel.find();
 
         // Checking Found or Not
@@ -45,33 +49,80 @@ export const CategoryListService = async (req) => {
     }
 }
 
-export const SliderListService = async (req) => {
 
+
+
+
+export const SliderListService = async (req) => {
+    try {
+        // Slider Data
+        const data = await ProductSliderModel.find();
+ 
+        // Checking Found or Not
+        if(!data || data.length === 0) {
+            return null;
+        }
+
+        // Final Result
+        return data;
+
+    }catch(e) {
+        console.log(e);
+        return res.status(400).json({status: "error", message: "Internal server error"});
+    }
 }
+
+
+
+
 
 export const ListByBrandService = async (req) => {
 
 }
 
+
+
+
+
 export const ListByCategoryService = async (req) => {
 
 }
+
+
+
+
 
 export const ListBySimilarService = async (req) => {
 
 }
 
+
+
+
+
 export const ListByKewwordService = async (req) => {
 
 }
+
+
+
+
 
 export const ListByRemarkService = async (req) => {
 
 }
 
+
+
+
+
 export const DetailsService = async (req) => {
 
 }
+
+
+
+
 
 export const ReviewsListService = async (req) => {
 
