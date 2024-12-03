@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const DataSchema = mongoose.Schema(
+const DataSchema =  mongoose.Schema(
     {
         brandName: {type: String, required: true, unique:true},
         brandImg: {type: String, required: true}

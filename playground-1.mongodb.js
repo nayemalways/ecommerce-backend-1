@@ -1,6 +1,14 @@
 use('MERN_Ecommerce(pre-rec)')
 
-db.createCollection('PaymentSettingsModel')
+db.brands.insertOne(
+    
+        {
+            brandName: "FreshMart",
+            brandImg: "https://example.com/images/freshmart-logo.png"
+        } 
+    
+    
+)
  
 
 // db.products.insert({
