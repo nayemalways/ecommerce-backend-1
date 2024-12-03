@@ -7,12 +7,42 @@ import ReviewModel from '../models/ProductModel/ReviewModel.js';
 
 
 
-export const BrandListService = async (req) => {
+export const BrandListService = async () => {
+    try {
+        // Find Brand Data
+        const data = await BrandModel.find();
 
+        // Checking Found or Not
+        if(!data || data.length === 0) {
+            return null;
+        }
+
+        // Final Result
+        return data;
+
+    }catch(e) {
+        console.log(e);
+        return res.status(400).json({status: "error", message: "Internal server error"});
+    }
 }
 
 export const CategoryListService = async (req) => {
+    try {
+        // Find Brand Data
+        const data = await  CategoryModel.find();
 
+        // Checking Found or Not
+        if(!data || data.length === 0) {
+            return null;
+        }
+
+        // Final Result
+        return data;
+
+    }catch(e) {
+        console.log(e);
+        return res.status(400).json({status: "error", message: "Internal server error"});
+    }
 }
 
 export const SliderListService = async (req) => {
