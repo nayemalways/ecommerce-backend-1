@@ -23,8 +23,6 @@ export const BrandListService = async () => {
 
 
 
-
-
 export const CategoryListService = async () => {
     try {
         // Category Data
@@ -39,20 +37,11 @@ export const CategoryListService = async () => {
 
 
 
-
-
 export const SliderListService = async () => {
     try {
         // Slider Data
         const data = await ProductSliderModel.find();
- 
-        // Checking Found or Not
-        if(!data || data.length === 0) {
-            return null;
-        }
-
-        // Final Result
-        return data;
+        return {status: "Success", data: data};
 
     }catch(e) {
         console.log(e);

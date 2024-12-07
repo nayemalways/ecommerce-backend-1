@@ -17,12 +17,7 @@ export const ProductCategoryList = async (req, res) => {
 
 export const ProductSliderList = async (req, res) => {
     const result = await SliderListService();
-
-    if(result === null) {
-        res.status(404).json({status: "fail", message: "No data found"});
-    }
-
-    res.json({status: "Success", data: result});
+    res.json(result)
 }
 
 
