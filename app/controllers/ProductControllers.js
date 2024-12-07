@@ -10,12 +10,7 @@ export const ProductBrandList = async (req, res) => {
 
 export const ProductCategoryList = async (req, res) => {
     const result = await CategoryListService();
-
-    if(result === null) {
-        res.status(404).json({status: "fail", message: "No data found"});
-    }
-
-    res.json({status: "Success", data: result});
+    res.json(result);
 }
 
 

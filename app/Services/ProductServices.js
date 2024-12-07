@@ -29,14 +29,7 @@ export const CategoryListService = async () => {
     try {
         // Category Data
         const data = await  CategoryModel.find();
-
-        // Checking Found or Not
-        if(!data || data.length === 0) {
-            return null;
-        }
-
-        // Final Result
-        return data;
+        return{status: "Success", data: data};
 
     }catch(e) {
         console.log(e);
