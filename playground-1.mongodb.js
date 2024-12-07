@@ -1,14 +1,6 @@
 use('MERN_Ecommerce(pre-rec)')
 
-db.brands.insertOne(
-    
-        {
-            brandName: "FreshMart",
-            brandImg: "https://example.com/images/freshmart-logo.png"
-        } 
-    
-    
-)
+db.brands.find()
  
 
 // db.products.insert({
