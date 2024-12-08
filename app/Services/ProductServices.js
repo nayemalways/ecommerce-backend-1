@@ -142,7 +142,34 @@ return {status: "Success", data: data};
 
 
 export const ListBySimilarService = async (req) => {
+    try {
+        const categoryID = new ObjectId(req.params.categoryID);
 
+        // Query
+        const match = {$match:{categoryID: categoryID}};
+        const limit = {$limit: 20};
+        const JoinWithBrandStage = {$lookup: {from: "brands", localField: "brandID", foreignField: "_id", as: "brand"}};
+        const JoinWithCategoryStage = {$lookup: {from: "categories", localField: "categoryID", foreignField: "_id", as: "category"}};
+        const UnwindBrandStage = {$unwind: "$brand"};
+        const UnwindCategoryStage = {$unwind: "$category"};
+        const projection = {$project: {categoryID: 0, brandID: 0, "brand._id": 0, "brand.createdAt": 0, "brand.updatedAt": 0,  "category._id": 0, "category.createdAt": 0, "category.updatedAt": 0}};
+
+        // Data Retriving
+        const data = await ProductModel.aggregate([
+            match,
+            limit,
+            JoinWithBrandStage,
+            JoinWithCategoryStage,
+            UnwindBrandStage,
+            UnwindCategoryStage,
+            projection
+        ])
+
+        return {status: "Success", data: data};
+    }catch(e) {
+        console.log(e);
+        return {status: "Error", message:"Internal server error..!"}
+    }
 }
 
 export const ListByKewwordService = async (req) => {
