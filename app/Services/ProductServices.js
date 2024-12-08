@@ -58,6 +58,7 @@ export const ListByBrandService = async (req) => {
     try {
         const BrandId = new ObjectId(req.params.brandId);
 
+        //Database Query
         const MatchStage = {$match: {brandID: BrandId}};
         const JoinWithBrandStage = {$lookup: {from: "brands", localField: "brandID", foreignField: "_id", as: "brand"}};
         const JoinWithCategoryStage = {$lookup: {from: "categories", localField: "categoryID", foreignField: "_id", as: "category"}};
@@ -65,7 +66,7 @@ export const ListByBrandService = async (req) => {
         const UnwindCategoryStage = {$unwind: "$category"};
     
     
-    
+        // Database operation
         let data = await ProductModel.aggregate([
             MatchStage,
             JoinWithBrandStage,
@@ -75,14 +76,7 @@ export const ListByBrandService = async (req) => {
             UnwindCategoryStage
         ])
     
-    
-        // Checking Found or Not
-        if(!data || data.length === 0) {
-            return null;
-        }
-    
-        // Final Result
-        return data;
+        return {status: "Success", data: data[0]};
  
     }catch(e) {
         console.log(e);
@@ -97,7 +91,32 @@ export const ListByBrandService = async (req) => {
 
 
 export const ListByCategoryService = async (req) => {
+    try {
+        const categoryID = new ObjectId(req.params.categoryID);
 
+        // Query
+        const match = {$match:{categoryID: categoryID}};
+        const JoinWithBrandStage = {$lookup: {from: "brands", localField: "brandID", foreignField: "_id", as: "brand"}};
+        const JoinWithCategoryStage = {$lookup: {from: "categories", localField: "categoryID", foreignField: "_id", as: "category"}};
+        const UnwindBrandStage = {$unwind: "$brand"};
+        const UnwindCategoryStage = {$unwind: "$category"};
+        const projection = {$project: {categoryID: 0, brandID: 0, "brand._id": 0, "brand.createdAt": 0, "brand.updatedAt": 0,  "category._id": 0, "category.createdAt": 0, "category.updatedAt": 0}};
+
+        // Data Retriving
+        const data = await ProductModel.aggregate([
+            match,
+            JoinWithBrandStage,
+            JoinWithCategoryStage,
+            UnwindBrandStage,
+            UnwindCategoryStage,
+            projection
+        ])
+
+        return {status: "Success", data: data[0]};
+    }catch(e) {
+        console.log(e);
+        return {status: "Error", message:"Internal server error..!"}
+    }
 }
 
 

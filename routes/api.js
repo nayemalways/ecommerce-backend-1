@@ -10,8 +10,8 @@ router.get('/ProductBrandList', ProductControllers.ProductBrandList);
 router.get('/ProductCategoryList', ProductControllers.ProductCategoryList);
 router.get('/ProductSliderList', ProductControllers.ProductSliderList);
 router.get('/ProductListByBrand/:brandId', ProductControllers.ProductListByBrand);
+router.get('/ProductListByCategory/:categoryID', ProductControllers.ProductListByCategory);
 
-router.get('/ProductListByCategory/:categoryId', ProductControllers.ProductListByCategory);
 router.get('/ProductListBySimilar/:keyword', ProductControllers.ProductListBySimilar);
 router.get('/ProductListByKewword/:Keyword', ProductControllers.ProductListByKewword);
 router.get('/ProductListByRemark/:Remark', ProductControllers.ProductListByRemark);
