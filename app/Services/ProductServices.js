@@ -22,7 +22,6 @@ export const BrandListService = async () => {
 }
 
 
-
 export const CategoryListService = async () => {
     try {
         // Category Data
@@ -34,7 +33,6 @@ export const CategoryListService = async () => {
         return {status: "error", message: "Internal server error"};
     }
 }
-
 
 
 export const SliderListService = async () => {
@@ -76,7 +74,7 @@ export const ListByBrandService = async (req) => {
             UnwindCategoryStage
         ])
     
-        return {status: "Success", data: data[0]};
+        return {status: "Success", data: data};
  
     }catch(e) {
         console.log(e);
@@ -85,10 +83,6 @@ export const ListByBrandService = async (req) => {
     }
 
 }
-
-
-
-
 
 export const ListByCategoryService = async (req) => {
     try {
@@ -112,7 +106,7 @@ export const ListByCategoryService = async (req) => {
             projection
         ])
 
-        return {status: "Success", data: data[0]};
+        return {status: "Success", data: data};
     }catch(e) {
         console.log(e);
         return {status: "Error", message:"Internal server error..!"}
@@ -120,23 +114,14 @@ export const ListByCategoryService = async (req) => {
 }
 
 
-
-
-
 export const ListBySimilarService = async (req) => {
 
 }
 
 
-
-
-
 export const ListByKewwordService = async (req) => {
 
 }
-
-
-
 
 
 export const ListByRemarkService = async (req) => {
