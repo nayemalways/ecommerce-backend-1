@@ -8,7 +8,7 @@ import mongoose from 'mongoose';
 const ObjectId = mongoose.Types.ObjectId;
 
 
-
+// Group: 1 -- PRODUCT BRAND, CATEGORY, SLIDER  SEARCH
 export const BrandListService = async () => {
     try {
         // Find Brand Data
@@ -21,7 +21,6 @@ export const BrandListService = async () => {
     }
 }
 
-
 export const CategoryListService = async () => {
     try {
         // Category Data
@@ -33,7 +32,6 @@ export const CategoryListService = async () => {
         return {status: "error", message: "Internal server error"};
     }
 }
-
 
 export const SliderListService = async () => {
     try {
@@ -50,7 +48,7 @@ export const SliderListService = async () => {
 
 
 
-
+// Group: 2 -- PRODUCT SEARCH BY BRAND, CATEGORY, KEYWORD, SIMILAR, REMARK
 export const ListByBrandService = async (req) => {
    
     try {
@@ -113,7 +111,6 @@ export const ListByCategoryService = async (req) => {
     }
 }
 
-
 export const ListByRemarkService = async (req) => {
     try {
         const Remark = req.params.Remark;
@@ -144,12 +141,9 @@ return {status: "Success", data: data};
 }
 
 
-
-
 export const ListBySimilarService = async (req) => {
 
 }
-
 
 export const ListByKewwordService = async (req) => {
 
