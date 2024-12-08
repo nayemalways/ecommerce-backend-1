@@ -172,18 +172,66 @@ export const ListBySimilarService = async (req) => {
     }
 }
 
-export const ListByKewwordService = async (req) => {
-
-}
-
-
-
-
 
 
 export const DetailsService = async (req) => {
+    try {
+        const productID = new ObjectId(req.params.ProductID);
+
+        // Query
+        const match = {$match:{_id: productID}};
+
+        const JoinWithBrandStage = {$lookup:{from: "brands" , localField: "brandID", foreignField: "_id", as: "brand"}};
+        const JoinWithCategoryStage = {$lookup:{from: "categories" , localField: "categoryID", foreignField: "_id", as: "category"}};
+        const JoinWithProductDetailsStage = {$lookup: {from: "ProductDetails", localField: "_id", foreignField: "productID", as: "ProductDetails"}};
+
+        const UnwindBrandStage = {$unwind:"$brand"};
+        const UnwindCategoryStage = {$unwind:"$category"};
+        const UnwindProductDetailsStage = {$unwind:"$ProductDetails"};
+
+        const projection = {$project: {
+            "category._id": 0, 
+            "brand._id": 0, 
+            "ProductDetails._id":0 ,
+            "brand.createdAt": 0,
+            "brand.updatedAt": 0,
+            "brand.createdAt": 0,
+            "category.updatedAt": 0,
+            "category.createdAt": 0,
+            "ProductDetails.updatedAt": 0,
+            "ProductDetails.createdAt": 0,
+            }};
+
+
+        // Data Retrive
+        const data = await ProductModel.aggregate([
+            match,
+            JoinWithBrandStage,
+            JoinWithCategoryStage,
+            JoinWithProductDetailsStage,
+            UnwindBrandStage,
+            UnwindCategoryStage,
+            UnwindProductDetailsStage,
+            projection
+        ])
+
+        return {status: "Success", data: data};
+    }catch(e) {
+        console.log(e);
+        return {status: "Success", message: "Internal server error..!"}
+    }
+}
+
+
+
+export const ListByKeywordService = async (req) => {
 
 }
+
+
+
+
+
 
 
 

@@ -13,9 +13,9 @@ router.get('/ProductListByBrand/:brandId', ProductControllers.ProductListByBrand
 router.get('/ProductListByCategory/:categoryID', ProductControllers.ProductListByCategory);
 router.get('/ProductListByRemark/:Remark', ProductControllers.ProductListByRemark);
 router.get('/ProductListBySimilar/:categoryID', ProductControllers.ProductListBySimilar);
+router.get('/ProductDetails/:ProductID', ProductControllers.ProductDetails);
 
-router.get('/ProductListByKewword/:Keyword', ProductControllers.ProductListByKewword);
-router.get('/ProductDetails/:ProductId', ProductControllers.ProductDetails);
+router.get('/ProductListByKeyword/:Keyword', ProductControllers.ProductListByKeyword);
 router.get('/ProductReviewsList/:ProductId', ProductControllers.ProductReviewsList);
 
 
