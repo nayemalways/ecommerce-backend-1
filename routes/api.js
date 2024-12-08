@@ -11,10 +11,10 @@ router.get('/ProductCategoryList', ProductControllers.ProductCategoryList);
 router.get('/ProductSliderList', ProductControllers.ProductSliderList);
 router.get('/ProductListByBrand/:brandId', ProductControllers.ProductListByBrand);
 router.get('/ProductListByCategory/:categoryID', ProductControllers.ProductListByCategory);
+router.get('/ProductListByRemark/:Remark', ProductControllers.ProductListByRemark);
 
 router.get('/ProductListBySimilar/:keyword', ProductControllers.ProductListBySimilar);
 router.get('/ProductListByKewword/:Keyword', ProductControllers.ProductListByKewword);
-router.get('/ProductListByRemark/:Remark', ProductControllers.ProductListByRemark);
 router.get('/ProductDetails/:ProductId', ProductControllers.ProductDetails);
 router.get('/ProductReviewsList/:ProductId', ProductControllers.ProductReviewsList);
 

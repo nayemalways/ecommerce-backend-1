@@ -35,6 +35,10 @@ export const ProductListByCategory = async (req, res) => {
 }
 
 
+export const ProductListByRemark = async (req, res) => {
+    const result = await ListByRemarkService(req);
+    res.json(result);
+}
 
 export const ProductListBySimilar = async (req, res) => {
     
@@ -47,9 +51,7 @@ export const ProductListByKewword = async (req, res) => {
 
 
 
-export const ProductListByRemark = async (req, res) => {
-    
-}
+
 
 
 

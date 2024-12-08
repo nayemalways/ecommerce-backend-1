@@ -114,6 +114,38 @@ export const ListByCategoryService = async (req) => {
 }
 
 
+export const ListByRemarkService = async (req) => {
+    try {
+        const Remark = req.params.Remark;
+
+    // Query
+    const match = {$match: {remark: Remark}};
+    const JoinWithBrandStage = {$lookup: {from: "brands", localField: "brandID", foreignField: "_id", as: "brand"}};
+    const JoinWithCategoryStage = {$lookup: {from: "categories", localField: "categoryID", foreignField: "_id", as: "category"}};
+    const UnwindBrandStage = {$unwind: "$brand"};
+    const UnwindCategoryStage = {$unwind: "$category"};
+    const projection = {$project: {categoryID: 0, brandID: 0, "brand._id": 0, "brand.createdAt": 0, "brand.updatedAt": 0,  "category._id": 0, "category.createdAt": 0, "category.updatedAt": 0}};
+
+    // Data Retiriving
+const data = await ProductModel.aggregate([
+    match,
+    JoinWithBrandStage,
+    JoinWithCategoryStage,
+    UnwindBrandStage,
+    UnwindCategoryStage,
+    projection
+])
+
+return {status: "Success", data: data};
+    }catch(e) {
+        console.log(e);
+        return {Status: "Error", message: "Inernal Server error...!"}
+    } 
+}
+
+
+
+
 export const ListBySimilarService = async (req) => {
 
 }
@@ -123,10 +155,6 @@ export const ListByKewwordService = async (req) => {
 
 }
 
-
-export const ListByRemarkService = async (req) => {
-
-}
 
 
 
