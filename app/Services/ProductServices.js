@@ -173,12 +173,11 @@ export const ListBySimilarService = async (req) => {
 }
 
 
-
 export const DetailsService = async (req) => {
     try {
         const productID = new ObjectId(req.params.ProductID);
 
-        // Query
+        // Database Query Writing
         const match = {$match:{_id: productID}};
 
         const JoinWithBrandStage = {$lookup:{from: "brands" , localField: "brandID", foreignField: "_id", as: "brand"}};
@@ -215,6 +214,7 @@ export const DetailsService = async (req) => {
             projection
         ])
 
+        // Return Data
         return {status: "Success", data: data};
     }catch(e) {
         console.log(e);
@@ -222,12 +222,43 @@ export const DetailsService = async (req) => {
     }
 }
 
-
-
 export const ListByKeywordService = async (req) => {
+    try {
+        const SearchRegex = {"$regex": req.params.Keyword, "$options": "i"};
+        const SearchParams = [{title: SearchRegex}, {shortDes: SearchRegex}];
+        const SearchQuery = {$or: SearchParams};
 
+        const match = {$match: SearchQuery};
+
+        const JoinWithBrandStage = {$lookup:{from: "brands", localField: "brandID", foreignField: "_id", as: "brand"}};
+        const JoinWithCategoryStage = {$lookup:{from: "categories", localField: "categoryID", foreignField: "_id", as: "category"}};
+
+        const UnwindBrandStage = {$unwind: "$brand"};
+        const UnwindCategoryStage = {$unwind: "$category"};
+
+        const projection = {$project: {categoryID: 0, brandID: 0, "brand._id": 0, "brand.createdAt": 0, "brand.updatedAt": 0,  "category._id": 0, "category.createdAt": 0, "category.updatedAt": 0}};
+
+
+        // Data Retriving
+        const data = await ProductModel.aggregate([
+            match,
+            JoinWithBrandStage,
+            JoinWithCategoryStage,
+            UnwindBrandStage,
+            UnwindCategoryStage,
+            projection
+        ])
+
+
+        // Return Data 
+        return {status: "Success", data: data}
+
+
+    }catch(e) {
+        console.log(e);
+        return {status: "Success", message: "Internal server error..!"}
+    }
 }
-
 
 
 

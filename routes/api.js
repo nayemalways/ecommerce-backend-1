@@ -14,8 +14,8 @@ router.get('/ProductListByCategory/:categoryID', ProductControllers.ProductListB
 router.get('/ProductListByRemark/:Remark', ProductControllers.ProductListByRemark);
 router.get('/ProductListBySimilar/:categoryID', ProductControllers.ProductListBySimilar);
 router.get('/ProductDetails/:ProductID', ProductControllers.ProductDetails);
-
 router.get('/ProductListByKeyword/:Keyword', ProductControllers.ProductListByKeyword);
+
 router.get('/ProductReviewsList/:ProductId', ProductControllers.ProductReviewsList);
 
 
