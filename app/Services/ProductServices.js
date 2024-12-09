@@ -263,13 +263,28 @@ export const ListByKeywordService = async (req) => {
 
 
 
-
-
-
-
-
 export const ReviewsListService = async (req) => {
+    try {
+        const productId = new ObjectId( req.params.ProductId);
 
+        const matchStage = {$match:{productID: productId}};
+        const JoinWithUserProfilesStage = {$lookup: {from: "profiles", localField: "userID", foreignField: "userID", as: "profile"}};
+        const UnwindProfileStage = {$unwind: "$profile"}
+        const projectionStage = {$project: {"des":1, "rating":1, "profile.cus_name": 1}}
+
+        // Data Retrive 
+        const data = await ReviewModel.aggregate([
+            matchStage,
+            JoinWithUserProfilesStage,
+            UnwindProfileStage,
+            projectionStage
+        ])
+
+        return {status: "Success", data: data};
+    }catch(e) {
+        console.log(e);
+        return {status: "Success", message: "Internal server error..!"}
+    }
 }
  
 

@@ -44,14 +44,14 @@ export const ProductListByKeyword = async (req, res) => {
     res.json(result);
 }
 
-
 export const ProductDetails = async (req, res) => {
     const result = await DetailsService(req);
     res.json(result);
 }
 
 export const ProductReviewsList= async (req, res) => {
-    
+    const result = await ReviewsListService(req);
+    res.json(result);
 }
 
 
