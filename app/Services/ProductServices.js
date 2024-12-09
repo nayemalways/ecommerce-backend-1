@@ -8,6 +8,14 @@ import mongoose from 'mongoose';
 const ObjectId = mongoose.Types.ObjectId;
 
 
+
+
+
+
+
+
+
+
 // Group: 1 -- PRODUCT BRAND, CATEGORY, SLIDER  SEARCH
 export const BrandListService = async () => {
     try {
@@ -140,7 +148,6 @@ return {status: "Success", data: data};
     } 
 }
 
-
 export const ListBySimilarService = async (req) => {
     try {
         const categoryID = new ObjectId(req.params.categoryID);
@@ -171,7 +178,6 @@ export const ListBySimilarService = async (req) => {
         return {status: "Error", message:"Internal server error..!"}
     }
 }
-
 
 export const DetailsService = async (req) => {
     try {
@@ -259,9 +265,6 @@ export const ListByKeywordService = async (req) => {
         return {status: "Success", message: "Internal server error..!"}
     }
 }
-
-
-
 
 export const ReviewsListService = async (req) => {
     try {
