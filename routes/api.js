@@ -1,5 +1,6 @@
 import express from "express";
 import * as ProductControllers from '../app/controllers/ProductControllers.js';
+import * as UserControllers from '../app/controllers/userController.js';
 
 // CREATEED ROUTER INSTANCE
 const router = express.Router();
@@ -15,10 +16,12 @@ router.get('/ProductListByRemark/:Remark', ProductControllers.ProductListByRemar
 router.get('/ProductListBySimilar/:categoryID', ProductControllers.ProductListBySimilar);
 router.get('/ProductDetails/:ProductID', ProductControllers.ProductDetails);
 router.get('/ProductListByKeyword/:Keyword', ProductControllers.ProductListByKeyword);
-
 router.get('/ProductReviewsList/:ProductId', ProductControllers.ProductReviewsList);
 
 
+
+// Users 
+router.get('/UserOTP/:email', UserControllers.UserOTP);
 
 // ROUTER EXPORTING
 export default router;
