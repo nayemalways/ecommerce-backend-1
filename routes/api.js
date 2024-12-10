@@ -1,6 +1,7 @@
 import express from "express";
 import * as ProductControllers from '../app/controllers/ProductControllers.js';
 import * as UserControllers from '../app/controllers/userController.js';
+import { UserAuthentication } from "../app/middlewares/AuthMiddleware.js";
 
 // CREATEED ROUTER INSTANCE
 const router = express.Router();
@@ -23,6 +24,7 @@ router.get('/ProductReviewsList/:ProductId', ProductControllers.ProductReviewsLi
 // Users 
 router.get('/UserOTP/:email', UserControllers.UserOTP);
 router.get('/OTPVerifyLogin/:email/:code', UserControllers.OTPVerifyLogin);
+router.get('/UserLogout', UserAuthentication , UserControllers.UserLogout);
 
 // ROUTER EXPORTING
 export default router;

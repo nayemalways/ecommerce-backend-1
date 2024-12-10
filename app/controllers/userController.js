@@ -27,7 +27,15 @@ export const UserOTP = async (req, res) => {
 
 
 export const UserLogout = async (req, res) => {
-    
+
+     // Remove cookie option by minus (-)
+     const cookieOptions = {expires: new Date(Date.now() - 24 * 60 * 60 * 1000), httpOnly: false};
+
+     // Set cookie
+     res.cookie("token", "", cookieOptions);
+
+     res.json({status: "Success", message: "Logout success"});
+
 }
 
 

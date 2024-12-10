@@ -1,9 +1,9 @@
 import { DecodeToken } from "../utility/TokenHelper.js";
 
 export const UserAuthentication = async (req, res, next) => {
-    const token = req.headers['token'] || req.cookies['token'];
+    const token = req.headers['token']  || req.cookies['token'];
 
-
+    // Token Decode
     const Decoded = DecodeToken(token);
 
     if(Decoded === null) {
