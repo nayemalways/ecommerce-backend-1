@@ -26,6 +26,7 @@ router.get('/UserOTP/:email', UserControllers.UserOTP);
 router.get('/OTPVerifyLogin/:email/:code', UserControllers.OTPVerifyLogin);
 router.get('/UserLogout', UserAuthentication , UserControllers.UserLogout);
 router.post('/SaveProfile', UserAuthentication , UserControllers.SaveProfile);
+router.get('/ReadProfile', UserAuthentication , UserControllers.ReadProfile);
 
 // ROUTER EXPORTING
 export default router;

@@ -8,7 +8,7 @@ export const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD;
 export const DATABASE_USERNAME = process.env.DATABASE_USERNAME;
 //  JWT CONFIG
 export const JWT_SECRET = process.env.JWT_SECRET;
-export const JWT_EXPIRATIONS_TIME = process.env.JWT_EXPIRATIONS_TIME || 2592000;
+export const JWT_EXPIRATIONS_TIME = process.env.JWT_EXPIRATION_TIME;
 
 // EMAIL CONFIG
 export const EMAIL_HOST = process.env.EMAIL_HOST;

@@ -2,6 +2,8 @@ import UserModel from "../models/UsersModel/UserModel.js";
 import ProfilesModel from "../models/UsersModel/UserProfiles.js";
 import { EmailSend } from "../utility/EmailSender.js";
 import { TokenEncode } from "../utility/TokenHelper.js";
+import mongoose from "mongoose";
+const ObjectId = mongoose.Types.ObjectId;
 
 
 export const UserOTPService = async (req) => {
@@ -102,20 +104,31 @@ export const UserOTPService = async (req) => {
 
 export const VerifyOTPService  = async (req) => {
     try {
+
         const otp = req.params.code;
         const email = req.params.email;
 
+
+        // Data searching
         const data = await UserModel.aggregate([
             {$match:{email: email, otp: otp}}
         ])
 
 
+        // Check data is found or not
         if(!data || data.length === 0) {
             return {status: "fail", message: "Invalid OTP"}
         }
 
+
+        // Email, _id
+        const User_Email = data[0]['email'];
+        const User_id =  data[0]['_id'].toString()
+
+
+        
         // Token Encode using user email and _id
-        const encoded = await TokenEncode(data['email', data['_id']]);
+        const encoded = await TokenEncode(User_Email, User_id);
 
         if(encoded === null) {
             return {status: 'fail', message:'Token info invalid'}
@@ -139,9 +152,9 @@ export const SaveProfileService  = async (req) => {
     try {
         const user_id = req.headers['user_id'];
         const reqBody = req.body;
-
+ 
         // Set user_id in the Profile Model
-        reqBody.user_id = user_id;
+        reqBody.userID =  user_id;
 
         // Update or Create Profile
         await ProfilesModel.updateOne({userID: user_id}, {$set:reqBody}, {upsert: true});
@@ -154,12 +167,17 @@ export const SaveProfileService  = async (req) => {
 }
 
 
-export const UpdateProfileService  = async (req) => {
-    
-}
-
-
 export const ReadProfileService  = async (req) => {
-    
+    try {
+
+        const user_id = req.headers['user_id'];
+        const data = await ProfilesModel.find({userID: user_id})
+
+        return {status: "Success", data: data};
+
+    }catch(e) {
+        console.log(e.toString());
+        return {status: "Error", message: "Internal server error..!"};
+    }
 }
  

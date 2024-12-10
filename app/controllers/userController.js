@@ -8,14 +8,13 @@ export const UserOTP = async (req, res) => {
 
 
  export const OTPVerifyLogin = async (req, res) => {
+
     const result = await VerifyOTPService(req);
 
     if(result['status'] === 'Success') {
 
-        // Set cookie option
+       // Set cookie
         const cookieOptions = {expires: new Date(Date.now() + 24 * 60 * 60 * 1000), httpOnly: false};
-
-        // Set cookie
         res.cookie("token", result['Token'], cookieOptions);
 
         res.json(result)
@@ -41,11 +40,12 @@ export const UserLogout = async (req, res) => {
 
 export const SaveProfile = async (req, res) => {
     const result = await SaveProfileService(req);
-    res.json({result});
+    res.json(result);
 }
 
 
 export const ReadProfile = async (req, res) => {
-    
+   const result = await ReadProfileService(req);
+   return res.json(result);
 }
  
