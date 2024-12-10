@@ -1,5 +1,6 @@
 import UserModel from "../models/UsersModel/UserModel.js";
 import { EmailSend } from "../utility/EmailSender.js";
+import { TokenEncode } from "../utility/TokenHelper.js";
 
 
 export const UserOTPService = async (req) => {
@@ -85,7 +86,7 @@ export const UserOTPService = async (req) => {
 
         if(OTPSender) {
             await UserModel.updateOne({email: email}, {$set: {otp: code}}, {upsert: true});
-
+            
             return {status: "Success", message: "A 6 digit OTP has been sent successfully"};
         }else {
             return {status: "fail", message: "OTP is not been sent"};
@@ -99,7 +100,33 @@ export const UserOTPService = async (req) => {
 
 
 export const VerifyOTPService  = async (req) => {
-    
+    try {
+        const otp = req.params.code;
+        const email = req.params.email;
+
+        const data = await UserModel.aggregate([
+            {$match:{email: email, otp: otp}}
+        ])
+
+
+        if(!data || data.length === 0) {
+            return {status: "fail", message: "Invalid OTP"}
+        }
+
+        const encoded = await TokenEncode(data['email', data['_id']]);
+
+        if(encoded === null) {
+            return {status: 'fail', message:'Token info invalid'}
+        }
+        
+
+        return {status: "Success", message: "Login success", Token: encoded};
+
+
+    }catch(e) {
+        console.log(e.toString());
+        return {status: "error", message: "Internal server error..!"};
+    }
 }
 
 

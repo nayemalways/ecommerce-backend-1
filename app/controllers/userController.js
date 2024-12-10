@@ -6,9 +6,10 @@ export const UserOTP = async (req, res) => {
 }
 
 
-export const VerifyOTP = async (req, res) => {
-    
-}
+ export const OTPVerifyLogin = async (req, res) => {
+    const result = await VerifyOTPService(req);
+    res.json(result);
+} 
 
 
 export const UserLogout = async (req, res) => {

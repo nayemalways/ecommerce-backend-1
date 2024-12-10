@@ -22,6 +22,7 @@ router.get('/ProductReviewsList/:ProductId', ProductControllers.ProductReviewsLi
 
 // Users 
 router.get('/UserOTP/:email', UserControllers.UserOTP);
+router.get('/OTPVerifyLogin/:email/:code', UserControllers.OTPVerifyLogin);
 
 // ROUTER EXPORTING
 export default router;
