@@ -1,5 +1,5 @@
 import { json } from "express";
-import {UserOTPService, VerifyOTPService, UserLogoutService, CreateProfileService, UpdateProfileService, ReadProfileService} from "../Services/UserServices.js";
+import {UserOTPService, VerifyOTPService, SaveProfileService, ReadProfileService} from "../Services/UserServices.js";
 
 export const UserOTP = async (req, res) => {
     const result = await UserOTPService(req);
@@ -39,13 +39,9 @@ export const UserLogout = async (req, res) => {
 }
 
 
-export const CreateProfile = async (req, res) => {
-    
-}
-
-
-export const UpdateProfile = async (req, res) => {
-    
+export const SaveProfile = async (req, res) => {
+    const result = await SaveProfileService(req);
+    res.json({result});
 }
 
 

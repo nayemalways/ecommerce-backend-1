@@ -1,4 +1,5 @@
 import UserModel from "../models/UsersModel/UserModel.js";
+import ProfilesModel from "../models/UsersModel/UserProfiles.js";
 import { EmailSend } from "../utility/EmailSender.js";
 import { TokenEncode } from "../utility/TokenHelper.js";
 
@@ -133,14 +134,23 @@ export const VerifyOTPService  = async (req) => {
     }
 }
 
+ 
+export const SaveProfileService  = async (req) => {
+    try {
+        const user_id = req.headers['user_id'];
+        const reqBody = req.body;
 
-export const UserLogoutService  = async (req) => {
-    
-}
+        // Set user_id in the Profile Model
+        reqBody.user_id = user_id;
 
+        // Update or Create Profile
+        await ProfilesModel.updateOne({userID: user_id}, {$set:reqBody}, {upsert: true});
+        return {status: "Success", message: "Profile save success"};
 
-export const CreateProfileService  = async (req) => {
-    
+    }catch(e) {
+        console.log(e.toString());
+        return {status: "Error", message: "Internal server error..!"};
+    }
 }
 
 
