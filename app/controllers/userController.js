@@ -1,6 +1,9 @@
 import { json } from "express";
 import {UserOTPService, VerifyOTPService, SaveProfileService, ReadProfileService} from "../Services/UserServices.js";
 
+
+
+
 export const UserOTP = async (req, res) => {
     const result = await UserOTPService(req);
     res.json(result);
