@@ -113,6 +113,7 @@ export const VerifyOTPService  = async (req) => {
             return {status: "fail", message: "Invalid OTP"}
         }
 
+        // Token Encode using user email and _id
         const encoded = await TokenEncode(data['email', data['_id']]);
 
         if(encoded === null) {
