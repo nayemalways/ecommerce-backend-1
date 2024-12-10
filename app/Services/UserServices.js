@@ -120,6 +120,9 @@ export const VerifyOTPService  = async (req) => {
         }
         
 
+        // User OTP reset after successfully login
+        await UserModel.updateOne({email: email}, {otp: "0"})
+
         return {status: "Success", message: "Login success", Token: encoded};
 
 
