@@ -170,10 +170,12 @@ export const SaveProfileService  = async (req) => {
 export const ReadProfileService  = async (req) => {
     try {
 
-        const user_id = req.headers['user_id'];
-        const data = await ProfilesModel.find({userID: user_id})
+        const user_id = new ObjectId(req.headers['user_id']);
+        const data = await ProfilesModel.aggregate([
+            {$match: {userID: user_id}}
+        ])
 
-        return {status: "Success", data: data};
+        return {status: "Success", data: data[0]};
 
     }catch(e) {
         console.log(e.toString());
