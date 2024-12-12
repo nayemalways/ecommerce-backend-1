@@ -1,4 +1,5 @@
-// DEPENDENCIES
+
+/*-------------DEPENDENCIES-----------*/
 import express from 'express';
 import hpp from 'hpp';
 import helmet from 'helmet';
@@ -12,10 +13,13 @@ import reateLimit from 'express-rate-limit';
 import router from './routes/api.js'
 import {DATABASE_URL, DATABASE_PASSWORD, DATABASE_USERNAME, REQUEST_LIMIT_NUMBER, REQUEST_LIMIT_TIME, WEB_CACHE, URL_ENCODED,MAX_JSON_SIZE, PORT} from './app/config/config.js'
 
-// APP
+
+
+/*------APP INSTANCE-------*/
 const app = express();
 
-// APPLICATION GLOBAL MIDDLEWARES
+
+/*-------------APPLICATION GLOBAL MIDDLEWARES-----------*/
 app.use(cors());
 app.use(helmet());
 app.use(hpp());
@@ -24,14 +28,14 @@ app.use(express.json({limit: MAX_JSON_SIZE}));
 app.use(express.urlencoded({extended: URL_ENCODED}));
 app.use(fileUpload());
 
-// RATE LIMT
+/*-------------RATE LIMIT-----------*/
 const limitter = reateLimit({windowMs: REQUEST_LIMIT_TIME, max: REQUEST_LIMIT_NUMBER});
 app.use(limitter);
 
-// WEB CACHE
+/*---------WEB CACHE-------*/
 app.set('etag', WEB_CACHE);
 
-// DATABASE CONNECTION
+/*-------DATABASE CONNECTION-----*/
 const options = {
     user: DATABASE_USERNAME,
     pass: DATABASE_PASSWORD,
@@ -45,13 +49,13 @@ mongoose.connect(DATABASE_URL, options)
 
 
 
-//  SET APPLICATION STOARGE
+/*--------PUBLIC STORAGE---------*/
 app.use(express.static('storage'));
 
-// API ROUTES
+/*------API ROUTES------*/
 app.use('/api', router);
 
 
 
-// *** RUN APPLICATIONSS
+/*-------------APPLICATION RUNNER-----------*/
 app.listen(PORT, () => console.log(`App running on https://localhost:${PORT}`))
