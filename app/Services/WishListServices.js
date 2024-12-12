@@ -79,11 +79,20 @@ export const WishListService = async (req) => {
 
 export const SaveWishListService = async (req) => {
     try {
+
         const userID = req.headers.user_id;
+
+
+        /*----DATABASE QUERY----*/
         const reqBody = req.body;
         reqBody.userID = userID;
 
+
+        /*-------------------SAVE PRODUCT IN THE WISH LIST DB------------------*/
         await WishListModel.updateOne(reqBody, {$set: reqBody}, {upsert: true})
+
+
+        /*---------------------RETURN DATA---------------------------*/
         return {status: "Success", message: "Wish list save success"};
 
 
@@ -97,12 +106,18 @@ export const SaveWishListService = async (req) => {
 
 
 export const WishListRemoveService = async (req) => {
+    
     try {
+        
         const userID = req.headers.user_id;
         const reqBody = req.body;
         reqBody.userID = userID;
 
+        /*-----REMOVE PRODUCT FROM THE WISHLIST DB--------*/
         await WishListModel.deleteOne(reqBody)
+
+
+        /*----------RETURN DATA-----------*/
         return {status: "Success", message: "Wish list delete success"};
 
 
