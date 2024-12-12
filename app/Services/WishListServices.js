@@ -1,3 +1,5 @@
+
+/*------------------DEPENDENCIES------------------*/
 import WishListModel from '../models/UsersModel/WishesModel.js';
 import mongoose from 'mongoose';
 const ObjectId = mongoose.Types.ObjectId;
@@ -7,12 +9,9 @@ const ObjectId = mongoose.Types.ObjectId;
 
 /* 
 ---------------------------------------------------------------------------------
-
-***WISH LIST LOGIC BUILD***
-
+*** WISH LIST LOGIC BUILD ***
 THIS IS THE HELPER FILE FOR THE WISHLISTCONTROLLERS.JS FILE.
 ALL THE CONTROLLER LOGIC IS BUILT HERE!
-
 ----------------------------------------------------------------------------------
 */
 
