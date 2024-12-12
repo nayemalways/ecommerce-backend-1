@@ -1,3 +1,8 @@
+
+
+
+/*----------------PRODUCT MODEL------------------*/
+
 import mongoose from "mongoose";
 
 const DataSchema = mongoose.Schema(
@@ -20,5 +25,8 @@ const DataSchema = mongoose.Schema(
 
 const ProductModel = mongoose.model('products', DataSchema);
 
-// Export Data Model
+
+
+
+/*---EXPORT PRUDUCT MODEL---*/
 export default ProductModel;
