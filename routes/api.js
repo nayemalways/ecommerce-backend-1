@@ -1,14 +1,18 @@
+
+/* --------------------------DEPENDENCIES------------------------ */
 import express from "express";
 import * as ProductControllers from '../app/controllers/ProductControllers.js';
 import * as UserControllers from '../app/controllers/userController.js';
 import * as WishListController from '../app/controllers/WishListControllers.js';
 import { UserAuthentication } from "../app/middlewares/AuthMiddleware.js";
 
-// CREATEED ROUTER INSTANCE
+
+
+/*---CREATEED ROUTER INSTANCE---*/
 const router = express.Router();
 
 
-// Product
+/*----------------------------PRODUCT API ENDPOINT---------------------------*/
 router.get('/ProductBrandList', ProductControllers.ProductBrandList);
 router.get('/ProductCategoryList', ProductControllers.ProductCategoryList);
 router.get('/ProductSliderList', ProductControllers.ProductSliderList);
@@ -22,7 +26,7 @@ router.get('/ProductReviewsList/:ProductId', ProductControllers.ProductReviewsLi
 
 
 
-// Users 
+/*----------------------------USERS API ENDPOINT---------------------------*/
 router.get('/UserOTP/:email', UserControllers.UserOTP);
 router.get('/OTPVerifyLogin/:email/:code', UserControllers.OTPVerifyLogin);
 router.get('/UserLogout', UserAuthentication , UserControllers.UserLogout);
@@ -32,7 +36,7 @@ router.get('/ReadProfile', UserAuthentication , UserControllers.ReadProfile);
 
 
 
-// User Wish List
+/*----------------------------WISHLIST API ENDPOINT---------------------------*/
 router.get('/ReadWishListProducts', UserAuthentication, WishListController.ReadWishListProducts);
 router.post('/SaveWishList', UserAuthentication, WishListController.SaveWishList);
 router.post('/RemoveWishList', UserAuthentication, WishListController.RemoveWishList);
@@ -42,7 +46,7 @@ router.post('/RemoveWishList', UserAuthentication, WishListController.RemoveWish
 
 
 
-// ROUTER EXPORTING
+/*---EXPORT ROUTER---*/
 export default router;
 
 
