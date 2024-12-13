@@ -7,7 +7,9 @@ const ObjectId = mongoose.Types.ObjectId;
 
 
 export const UserOTPService = async (req) => {
+
     try {
+
         const email = req.params.email;
         const code = Math.floor(100000 + Math.random() * 900000);
         const EmailSub = `MERN-SHOP User Login OTP Verification`
@@ -85,15 +87,21 @@ export const UserOTPService = async (req) => {
 </html>
 `
 
+        /* EMAIL SEND TO USERS MAIL */
         const OTPSender = await EmailSend(email, EmailSub, EmailText, EmailHTML);
 
+
         if(OTPSender) {
+
             await UserModel.updateOne({email: email}, {$set: {otp: code}}, {upsert: true});
-            
-            return {status: "Success", message: "A 6 digit OTP has been sent successfully"};
+            return {status: "Success", message: "6 Digit OTP has been sent successfully"};
+
         }else {
+
             return {status: "fail", message: "OTP is not been sent"};
+
         }
+
 
     }catch(e) {
         console.log(e);
