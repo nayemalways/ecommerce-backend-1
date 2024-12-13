@@ -111,31 +111,30 @@ export const UserOTPService = async (req) => {
 
 
 export const VerifyOTPService  = async (req) => {
+
     try {
 
         const otp = req.params.code;
         const email = req.params.email;
 
-
-        // Data searching
+        /*----------OTP MATCHING------------*/
         const data = await UserModel.aggregate([
             {$match:{email: email, otp: otp}}
         ])
 
 
-        // Check data is found or not
+        /*-------------CHECKING DATA FOUND OR NOT--------*/
         if(!data || data.length === 0) {
             return {status: "fail", message: "Invalid OTP"}
         }
 
 
-        // Email, _id
+        /*----------USER EMAIL, ID--------------*/
         const User_Email = data[0]['email'];
         const User_id =  data[0]['_id'].toString()
 
 
-        
-        // Token Encode using user email and _id
+        /*-------ENCODEDE USER MAIL AND ID INTO TOKEN---------*/
         const encoded = await TokenEncode(User_Email, User_id);
 
         if(encoded === null) {
@@ -143,9 +142,11 @@ export const VerifyOTPService  = async (req) => {
         }
         
 
-        // User OTP reset after successfully login
+         /*-----------OTP RESET AFTER LOGGED IN------------*/
         await UserModel.updateOne({email: email}, {otp: "0"});
 
+
+         /*----------------RETURN STATUS------------------*/
         return {status: "Success", message: "Login success", Token: encoded};
 
 
