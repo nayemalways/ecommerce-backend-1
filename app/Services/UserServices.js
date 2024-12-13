@@ -159,13 +159,14 @@ export const VerifyOTPService  = async (req) => {
  
 export const SaveProfileService  = async (req) => {
     try {
+
         const user_id = req.headers['user_id'];
         const reqBody = req.body;
  
-        // Set user_id in the Profile Model
+         /*----SET USER ID IN THE PROFILE-----*/
         reqBody.userID =  user_id;
 
-        // Update or Create Profile
+        /*-------CREATE OR UPDATE USER INFO WHETHER ALREADY USER CREATED OR NOT--------*/
         await ProfilesModel.updateOne({userID: user_id}, {$set:reqBody}, {upsert: true});
         return {status: "Success", message: "Profile save success"};
 
@@ -180,10 +181,13 @@ export const ReadProfileService  = async (req) => {
     try {
 
         const user_id = new ObjectId(req.headers['user_id']);
+
+         /*-------READ USER PROFILE'S---------*/
         const data = await ProfilesModel.aggregate([
             {$match: {userID: user_id}}
         ])
 
+         /*-------RETURN STATUS---------*/
         return {status: "Success", data: data[0]};
 
     }catch(e) {
