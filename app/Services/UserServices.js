@@ -87,7 +87,7 @@ export const UserOTPService = async (req) => {
 </html>
 `
 
-        /* EMAIL SEND TO USERS MAIL */
+        /*---------EMAIL SEND TO USERS MAIL---------*/
         const OTPSender = await EmailSend(email, EmailSub, EmailText, EmailHTML);
 
 
