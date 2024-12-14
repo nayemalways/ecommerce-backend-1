@@ -11,8 +11,13 @@ const ObjectId = mongoose.Types.ObjectId;
 export const SaveProductToCartService = async (req) => {
     try {
 
-        
+        const userID = new ObjectId( req.headers.user_id);
+        const reqBody = req.body;
+        reqBody.userID = userID;
 
+        await CartModel.create(reqBody);
+
+        return {status: "Success", message: "Product added to cart suuccessful!"};
 
     }catch(e) {
         console.log(e);
