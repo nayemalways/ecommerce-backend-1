@@ -4,6 +4,7 @@ import express from "express";
 import * as ProductControllers from '../app/controllers/ProductControllers.js';
 import * as UserControllers from '../app/controllers/userController.js';
 import * as WishListController from '../app/controllers/WishListControllers.js';
+import * as CartListController from '../app/controllers/CartListControllers.js';
 import { UserAuthentication } from "../app/middlewares/AuthMiddleware.js";
 
 
@@ -42,8 +43,10 @@ router.post('/SaveWishList', UserAuthentication, WishListController.SaveWishList
 router.post('/RemoveWishList', UserAuthentication, WishListController.RemoveWishList);
 
 
-
-
+/*----------------------------CARTLIST API ENDPOINT---------------------------*/
+router.post('/SaveProductToCart', UserAuthentication, CartListController.SaveProductToCart);
+router.post('/UpdateProductOfCart', UserAuthentication, CartListController.UpdateProductOfCart);
+router.get('/RemoveProductFromCart', UserAuthentication, CartListController.RemoveProductFromCart);
 
 
 /*---EXPORT ROUTER---*/
