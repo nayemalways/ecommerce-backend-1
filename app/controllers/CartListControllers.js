@@ -1,5 +1,4 @@
-import { RemoveProductFromCartService, SaveProductToCartService, UpdateProductOfCartService } from "../Services/CartListServices.js";
-
+import { RemoveProductFromCartService, SaveProductToCartService, SelectCartListProductService, UpdateProductOfCartService } from "../Services/CartListServices.js";
 
 
 
@@ -17,5 +16,12 @@ export const UpdateProductOfCart = async (req, res) => {
 
 export const RemoveProductFromCart = async (req, res) => {
     const result = await RemoveProductFromCartService(req);
+    res.json(result);
+}
+
+
+
+export const SelectCartListProduct = async (req, res) => {
+    const result = await SelectCartListProductService(req);
     res.json(result);
 }

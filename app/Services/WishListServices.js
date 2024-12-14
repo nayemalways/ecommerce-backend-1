@@ -52,7 +52,8 @@ export const WishListService = async (req) => {
 
 
 
-        /*--------JOIN PRODUCT WITH WISH LIST MODEL----------*/
+      
+        /*--------JOIN PRODUCT WITH WISH LIST MODEL AND SELECT DATA----------*/
         const data = await WishListModel.aggregate([
             matchStage,
             JoinWithProductStage,
@@ -64,6 +65,8 @@ export const WishListService = async (req) => {
             projectionStage
         ]);
 
+
+        
         /*----------RETURN DATA-----------*/
         return {status: "Success", data: data};
 
