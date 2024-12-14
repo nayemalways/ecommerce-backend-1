@@ -45,7 +45,7 @@ router.post('/RemoveWishList', UserAuthentication, WishListController.RemoveWish
 
 /*----------------------------CARTLIST API ENDPOINT---------------------------*/
 router.post('/SaveProductToCart', UserAuthentication, CartListController.SaveProductToCart);
-router.post('/UpdateProductOfCart', UserAuthentication, CartListController.UpdateProductOfCart);
+router.post('/UpdateProductOfCart/:CartID', UserAuthentication, CartListController.UpdateProductOfCart);
 router.get('/RemoveProductFromCart', UserAuthentication, CartListController.RemoveProductFromCart);
 router.get('/SelectCartListProduct', UserAuthentication, CartListController.SelectCartListProduct);
 

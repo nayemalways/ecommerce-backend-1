@@ -33,7 +33,20 @@ export const SaveProductToCartService = async (req) => {
 
 
 export const UpdateProductOfCartService = async (req) => {
+    
     try {
+
+
+        const userID = req.headers.user_id;
+        const CartID = req.params.CartID;
+        const reqBody = req.body;
+
+        /*----------------CART LIST PRUDUCT UPDATE-----------------*/
+        await CartModel.updateOne({_id: CartID, userID}, {$set: reqBody});
+
+        /*----------------RETURN STATUS-----------------*/
+        return {status: "Success", message: "Cart updated successful!"};
+
 
     }catch(e) {
         console.log(e);
@@ -98,7 +111,7 @@ export const SelectCartListProductService = async (req) => {
         }}
 
 
-        
+
         /*--------JOIN PRODUCT WITH WISH LIST MODEL AND SELECT DATA----------*/
         const data = await CartModel.aggregate([
             matchStage,
