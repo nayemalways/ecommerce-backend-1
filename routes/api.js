@@ -5,6 +5,7 @@ import * as ProductControllers from '../app/controllers/ProductControllers.js';
 import * as UserControllers from '../app/controllers/userController.js';
 import * as WishListController from '../app/controllers/WishListControllers.js';
 import * as CartListController from '../app/controllers/CartListControllers.js';
+import * as InvoiceControllers from '../app/controllers/InvoiceControllers.js'
 import { UserAuthentication } from "../app/middlewares/AuthMiddleware.js";
 
 
@@ -27,6 +28,7 @@ router.get('/ProductReviewsList/:ProductId', ProductControllers.ProductReviewsLi
 
 
 
+
 /*----------------------------USERS API ENDPOINT---------------------------*/
 router.get('/UserOTP/:email', UserControllers.UserOTP);
 router.get('/OTPVerifyLogin/:email/:code', UserControllers.OTPVerifyLogin);
@@ -43,11 +45,30 @@ router.post('/SaveWishList', UserAuthentication, WishListController.SaveWishList
 router.post('/RemoveWishList', UserAuthentication, WishListController.RemoveWishList);
 
 
+
+
 /*----------------------------CARTLIST API ENDPOINT---------------------------*/
 router.post('/SaveProductToCart', UserAuthentication, CartListController.SaveProductToCart);
 router.post('/UpdateProductOfCart/:CartID', UserAuthentication, CartListController.UpdateProductOfCart);
 router.get('/RemoveProductFromCart', UserAuthentication, CartListController.RemoveProductFromCart);
 router.get('/SelectCartListProduct', UserAuthentication, CartListController.SelectCartListProduct);
+
+
+
+/*----------------------------INVOICE AND PAYMENT API ENDPOINT---------------------------*/
+router.get('/CreateInvoice', UserAuthentication, InvoiceControllers.CreateInvoice);
+router.get('/PaymentFail', UserAuthentication, InvoiceControllers.PaymentFail);
+router.get('/PaymentCancel', UserAuthentication, InvoiceControllers.PaymentCancel);
+router.get('/PaymentIPN', UserAuthentication, InvoiceControllers.PaymentIPN);
+router.get('/PaymentSuccess', UserAuthentication, InvoiceControllers.PaymentSuccess);
+
+
+
+
+
+
+
+
 
 
 /*---EXPORT ROUTER---*/
