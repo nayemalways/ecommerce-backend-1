@@ -43,7 +43,20 @@ export const UpdateProductOfCartService = async (req) => {
 
 export const RemoveProductFromCartService = async (req) => {
     try {
+        
+        const userID = new ObjectId( req.headers.user_id);
+        const reqBody = req.body;
 
+        /*-----INJECT USERID TO CART LIST-----*/
+        reqBody.userID = userID;
+
+
+         /*---REMOVE CART LIST PRODUCT----*/
+        await CartModel.deleteOne(reqBody);
+
+         /*---------------------RETURN STATUS--------------------*/
+        return {status: "Success", message: "Product Removed form Cart-List"}
+        
     }catch(e) {
         console.log(e);
         return {status: "Error", message: "Internal server error"}
