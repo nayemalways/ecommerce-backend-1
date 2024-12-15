@@ -57,10 +57,14 @@ router.get('/SelectCartListProduct', UserAuthentication, CartListController.Sele
 
 /*----------------------------INVOICE AND PAYMENT API ENDPOINT---------------------------*/
 router.get('/CreateInvoice', UserAuthentication, InvoiceControllers.CreateInvoice);
-router.get('/PaymentFail', UserAuthentication, InvoiceControllers.PaymentFail);
-router.get('/PaymentCancel', UserAuthentication, InvoiceControllers.PaymentCancel);
-router.get('/PaymentIPN', UserAuthentication, InvoiceControllers.PaymentIPN);
-router.get('/PaymentSuccess', UserAuthentication, InvoiceControllers.PaymentSuccess);
+
+router.get('/InvoiceList', UserAuthentication, InvoiceControllers.InvoiceList);
+router.get('/InvoiceProductList', UserAuthentication, InvoiceControllers.InvoiceProductList);
+
+router.post('/PaymentSuccess/:trxID', UserAuthentication, InvoiceControllers.PaymentSuccess);
+router.post('/PaymentCancel/:trxID', UserAuthentication, InvoiceControllers.PaymentCancel);
+router.post('/PaymentFail/:trxID', UserAuthentication, InvoiceControllers.PaymentFail);
+router.post('/PaymentIPN/:trxID', UserAuthentication, InvoiceControllers.PaymentIPN);
 
 
 

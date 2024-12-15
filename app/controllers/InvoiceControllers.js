@@ -30,3 +30,16 @@ export const PaymentSuccess = async (req, res) => {
     const result = await PaymentSuccessService(req);
     res.json(result);
 }
+
+
+export const InvoiceList = async (req, res) => {
+    const result = await PaymentSuccessService(req);
+    res.json(result);
+}
+
+
+
+export const InvoiceProductList = async (req, res) => {
+    const result = await PaymentSuccessService(req);
+    res.json(result);
+}
