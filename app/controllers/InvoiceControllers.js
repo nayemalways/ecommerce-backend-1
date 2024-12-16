@@ -2,8 +2,40 @@ import { CreateInvoiceService, PaymentFailService, PaymentCancelService, Payment
 
 
 
+
+
+
+
+
+
+
+
+// INVOICE CONTROLLER FUNCTION
 export const CreateInvoice = async (req, res) => {
     const result = await CreateInvoiceService(req);
+    res.json(result);
+}
+
+
+export const InvoiceList = async (req, res) => {
+    const result = await PaymentSuccessService(req);
+    res.json(result);
+}
+
+
+
+
+export const InvoiceProductList = async (req, res) => {
+    const result = await PaymentSuccessService(req);
+    res.json(result);
+}
+
+
+
+// PAYMENT CONTROLLER FUNCTION
+
+export const PaymentSuccess = async (req, res) => {
+    const result = await PaymentSuccessService(req);
     res.json(result);
 }
 
@@ -26,20 +58,6 @@ export const PaymentIPN = async (req, res) => {
 }
 
 
-export const PaymentSuccess = async (req, res) => {
-    const result = await PaymentSuccessService(req);
-    res.json(result);
-}
-
-
-export const InvoiceList = async (req, res) => {
-    const result = await PaymentSuccessService(req);
-    res.json(result);
-}
 
 
 
-export const InvoiceProductList = async (req, res) => {
-    const result = await PaymentSuccessService(req);
-    res.json(result);
-}
