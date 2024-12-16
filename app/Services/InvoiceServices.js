@@ -18,12 +18,8 @@ const ObjectID = mongoose.Types.ObjectId;
 export const CreateInvoiceService = async (req) => {
     try {
 
-
-
         const userID = new ObjectID(req.headers.user_id);
         const userEamil = req.headers.email;
-
-
 
         /*====^=============^==============<>Step 01: Calculate Total Payable & Vat<>================^=================^========*/
         const matchStage = {$match: {userID}};
