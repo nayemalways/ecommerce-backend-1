@@ -180,10 +180,11 @@ export const CreateInvoiceService = async (req) => {
 
 export const PaymentSuccessService = async (req) => {
     try {
+
         const tran_id = req.params.trxID;
         await InvoiceModel.updateOne({tran_id: tran_id}, {payment_status: "success"});
+        return {status: "Success", message: "Payment Successful"};
         
-        return {status: "Success", message: "Payment Successful"}
     }catch(e) {
         console.log(e);
         return {status: "Error", message: "Internal server error..1!"}
@@ -194,10 +195,11 @@ export const PaymentSuccessService = async (req) => {
 
 export const PaymentFailService = async (req) => {
     try {
+
         const tran_id = req.params.trxID;
         await InvoiceModel.updateOne({tran_id: tran_id}, {payment_status: "failed"});
-        
-        return {status: "Success", message: "Payment failed"}
+        return {status: "Success", message: "Payment failed"};
+
     }catch(e) {
         console.log(e);
         return {status: "Error", message: "Internal server error..1!"}
@@ -208,10 +210,11 @@ export const PaymentFailService = async (req) => {
 
 export const PaymentCancelService = async (req) => {
     try {
+
         const tran_id = req.params.trxID;
         await InvoiceModel.updateOne({tran_id: tran_id}, {payment_status: "cancel"});
-        
         return {status: "Success", message: "Payment cancel"}
+
     }catch(e) {
         console.log(e);
         return {status: "Error", message: "Internal server error..1!"}
@@ -221,7 +224,18 @@ export const PaymentCancelService = async (req) => {
 
 
 export const PaymentIPNService = async (req) => {
+    try {
 
+        const tran_id = req.params.trxID;
+        const status = req.body['status'];
+
+        await InvoiceModel.updateOne({tran_id: tran_id}, {payment_status: status});
+        return {status: "Success", message: `Payment ${status}`}
+
+    }catch(e) {
+        console.log(e);
+        return {status: "Error", message: "Internal server error..1!"}
+    }
 }
 
 
