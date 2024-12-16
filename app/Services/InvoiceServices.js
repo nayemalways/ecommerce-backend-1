@@ -135,7 +135,7 @@ export const CreateInvoiceService = async (req) => {
         form.append("cancel_url", PaymentSettings[0]["cancel_url"]);
         form.append("ipn_url", PaymentSettings[0]["ipn_url"]);
 
-     
+        
         // CUSTOMER DETAILS
         form.append("cus_name", profile[0]['cus_name']);
         form.append("cus_email", userEamil);
@@ -172,8 +172,7 @@ export const CreateInvoiceService = async (req) => {
         const SSL_Response = await axios.post(PaymentSettings[0]["init_url"], form);
 
 
-
-        return {status: "Success",  data:   SSL_Response.data}
+        return {status: "Success",  data: SSL_Response.data }
 
     }catch(e) {
         console.log(e.toString());
