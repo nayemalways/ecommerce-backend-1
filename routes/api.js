@@ -59,7 +59,7 @@ router.get('/SelectCartListProduct', UserAuthentication, CartListController.Sele
 router.get('/CreateInvoice', UserAuthentication, InvoiceControllers.CreateInvoice);
 
 router.get('/InvoiceList', UserAuthentication, InvoiceControllers.InvoiceList);
-router.get('/InvoiceProductList', UserAuthentication, InvoiceControllers.InvoiceProductList);
+router.get('/InvoiceProductList/:invoice_id', UserAuthentication, InvoiceControllers.InvoiceProductList);
 
 router.post('/PaymentSuccess/:trxID', UserAuthentication, InvoiceControllers.PaymentSuccess);
 router.post('/PaymentCancel/:trxID', UserAuthentication, InvoiceControllers.PaymentCancel);

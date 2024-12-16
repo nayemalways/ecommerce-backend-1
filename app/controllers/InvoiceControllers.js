@@ -1,4 +1,4 @@
-import { CreateInvoiceService, PaymentFailService, PaymentCancelService, PaymentIPNService, PaymentSuccessService } from "../Services/InvoiceServices.js"
+import { CreateInvoiceService, PaymentFailService, PaymentCancelService, PaymentIPNService, PaymentSuccessService, InvoiceListService, InvoiceProductListService } from "../Services/InvoiceServices.js"
 import InvoiceModel from "../models/InvoiceAndPayment/InvoiceModel.js";
 
 
@@ -18,7 +18,7 @@ export const CreateInvoice = async (req, res) => {
 
 
 export const InvoiceList = async (req, res) => {
-    const result = await PaymentSuccessService(req);
+    const result = await InvoiceListService(req);
     res.json(result);
 }
 
@@ -26,7 +26,7 @@ export const InvoiceList = async (req, res) => {
 
 
 export const InvoiceProductList = async (req, res) => {
-    const result = await PaymentSuccessService(req);
+    const result = await InvoiceProductListService(req);
     res.json(result);
 }
 

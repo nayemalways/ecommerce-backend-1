@@ -184,7 +184,7 @@ export const PaymentSuccessService = async (req) => {
         const tran_id = req.params.trxID;
         await InvoiceModel.updateOne({tran_id: tran_id}, {payment_status: "success"});
         return {status: "Success", message: "Payment Successful"};
-        
+
     }catch(e) {
         console.log(e);
         return {status: "Error", message: "Internal server error..1!"}
@@ -240,17 +240,42 @@ export const PaymentIPNService = async (req) => {
 
 
 
+export const InvoiceListService = async (req) => {
+     try {
 
+        const userID = req.headers.user_id;
+        const data = await InvoiceModel.find({userID});
 
+        return {status: "Success", data: data};
 
-
-export const InvoiceList = async (req) => {
-     
+     }catch(e) {
+        console.log(e);
+        return {status: "Error", message: "Internal server error..!"}
+     }
 }
 
 
 
-export const InvoiceProductList = async (req) => {
-   
+export const InvoiceProductListService = async (req) => {
+   try {
+
+    const userId = new ObjectID(req.headers.user_id);
+    const invoice_id = new ObjectID(req.params.invoice_id);
+
+    const matchStage = {$match: {userID: userId, invoiceID: invoice_id}};
+    const JoinWithProduct = {$lookup: {from: "products", localField: "productID", foreignField: "_id", as: "product"}};
+    const Unwind = {$unwind: "$product"};
+
+    const data = await InvoiceProductModel.aggregate([
+        matchStage,
+        JoinWithProduct,
+        Unwind
+    ])
+
+    return {status: "Success", data: data};
+
+   }catch(e) {
+     
+   }
 }
  
