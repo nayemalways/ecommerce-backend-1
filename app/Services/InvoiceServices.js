@@ -126,9 +126,9 @@ export const CreateInvoiceService = async (req) => {
         form.append("total_amount", payable.toString());
         form.append("currency", PaymentSettings[0]["currency"]);
         form.append("tran_id",  tran_id);
-        form.append("success_url", PaymentSettings[0]["success_url"]);
-        form.append("fail_url", PaymentSettings[0]["fail_url"]);
-        form.append("cancel_url", PaymentSettings[0]["cancel_url"]);
+        form.append("success_url", `${PaymentSettings[0]["success_url"]}/${tran_id}`);
+        form.append("fail_url", `${PaymentSettings[0]["fail_url"]}/${tran_id}`);
+        form.append("cancel_url", `${PaymentSettings[0]["cancel_url"]}/${tran_id}`);
         form.append("ipn_url", PaymentSettings[0]["ipn_url"]);
 
         
@@ -178,14 +178,44 @@ export const CreateInvoiceService = async (req) => {
 
 
 
-export const PaymentFailService = async (req) => {
+export const PaymentSuccessService = async (req) => {
+    try {
+        const tran_id = req.params.trxID;
+        await InvoiceModel.updateOne({tran_id: tran_id}, {payment_status: "success"});
+        
+        return {status: "Success", message: "Payment Successful"}
+    }catch(e) {
+        console.log(e);
+        return {status: "Error", message: "Internal server error..1!"}
+    }
+}
 
+
+
+export const PaymentFailService = async (req) => {
+    try {
+        const tran_id = req.params.trxID;
+        await InvoiceModel.updateOne({tran_id: tran_id}, {payment_status: "failed"});
+        
+        return {status: "Success", message: "Payment failed"}
+    }catch(e) {
+        console.log(e);
+        return {status: "Error", message: "Internal server error..1!"}
+    }
 }
 
 
 
 export const PaymentCancelService = async (req) => {
-
+    try {
+        const tran_id = req.params.trxID;
+        await InvoiceModel.updateOne({tran_id: tran_id}, {payment_status: "cancel"});
+        
+        return {status: "Success", message: "Payment cancel"}
+    }catch(e) {
+        console.log(e);
+        return {status: "Error", message: "Internal server error..1!"}
+    }
 }
 
 
@@ -196,9 +226,7 @@ export const PaymentIPNService = async (req) => {
 
 
 
-export const PaymentSuccessService = async (req) => {
 
-}
 
 
 

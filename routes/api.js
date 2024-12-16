@@ -69,6 +69,11 @@ router.post('/PaymentIPN/:trxID', UserAuthentication, InvoiceControllers.Payment
 
 
 
+// router.get('/deleteInvoice', UserAuthentication, InvoiceControllers.deleteInvoice);
+
+
+
+
 
 
 
