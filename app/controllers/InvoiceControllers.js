@@ -63,17 +63,5 @@ export const PaymentIPN = async (req, res) => {
 
 
 
-/*export const deleteInvoice = async (req, res) => {
-    try {
-        const user_id = req.headers.user_id;
-
-    const data = await InvoiceModel.deleteMany({userID: user_id});
-    res.json({status: "Success", data: data})
-    }catch(e) {
-        console.log(e);
-        return res.json({status: "Error"})
-    }
-}
-*/
-
+ 
 

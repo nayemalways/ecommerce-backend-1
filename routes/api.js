@@ -7,6 +7,7 @@ import * as WishListController from '../app/controllers/WishListControllers.js';
 import * as CartListController from '../app/controllers/CartListControllers.js';
 import * as InvoiceControllers from '../app/controllers/InvoiceControllers.js'
 import { UserAuthentication } from "../app/middlewares/AuthMiddleware.js";
+import * as FeaturesControllers from "../app/controllers/FeaturesControllers.js";
 
 
 
@@ -69,7 +70,11 @@ router.post('/PaymentIPN/:trxID', UserAuthentication, InvoiceControllers.Payment
 
 
 
-// router.get('/deleteInvoice', UserAuthentication, InvoiceControllers.deleteInvoice);
+/*----------------------------FEATURES API ENDPOINT---------------------------*/
+router.get('/FeaturesList', FeaturesControllers.FeaturesList);
+
+
+
 
 
 
