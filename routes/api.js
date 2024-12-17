@@ -26,6 +26,7 @@ router.get('/ProductListBySimilar/:categoryID', ProductControllers.ProductListBy
 router.get('/ProductDetails/:ProductID', ProductControllers.ProductDetails);
 router.get('/ProductListByKeyword/:Keyword', ProductControllers.ProductListByKeyword);
 router.get('/ProductReviewsList/:ProductId', ProductControllers.ProductReviewsList);
+router.post('/ProductReviewCreate', ProductControllers.ProductReviewCreate);
 
 
 
@@ -58,10 +59,8 @@ router.get('/SelectCartListProduct', UserAuthentication, CartListController.Sele
 
 /*----------------------------INVOICE AND PAYMENT API ENDPOINT---------------------------*/
 router.get('/CreateInvoice', UserAuthentication, InvoiceControllers.CreateInvoice);
-
 router.get('/InvoiceList', UserAuthentication, InvoiceControllers.InvoiceList);
 router.get('/InvoiceProductList/:invoice_id', UserAuthentication, InvoiceControllers.InvoiceProductList);
-
 router.post('/PaymentSuccess/:trxID', UserAuthentication, InvoiceControllers.PaymentSuccess);
 router.post('/PaymentCancel/:trxID', UserAuthentication, InvoiceControllers.PaymentCancel);
 router.post('/PaymentFail/:trxID', UserAuthentication, InvoiceControllers.PaymentFail);

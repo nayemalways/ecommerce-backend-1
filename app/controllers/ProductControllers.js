@@ -1,4 +1,25 @@
-import { BrandListService, CategoryListService, SliderListService, ListByBrandService, ListByCategoryService, ListBySimilarService, ListByKeywordService, ListByRemarkService, DetailsService, ReviewsListService } from "../Services/ProductServices.js"
+
+
+/*--------------------------DEPENDENCIE-------------------------*/
+import {
+     BrandListService,
+     CategoryListService, 
+     SliderListService,
+     ListByBrandService,
+     ListByCategoryService, 
+     ListBySimilarService, 
+     ListByKeywordService, 
+     ListByRemarkService, 
+     DetailsService, 
+     ReviewsListService, 
+     ProductReviewCreateService 
+    } from "../Services/ProductServices.js"
+
+
+
+
+
+
 
 // Group: 1 -- PRODUCT SEARCH BY BRAND, CATEGORY, SLIDER
 export const ProductBrandList = async (req, res) => {
@@ -15,6 +36,7 @@ export const ProductSliderList = async (req, res) => {
     const result = await SliderListService();
     res.json(result)
 }
+
 
 
 
@@ -51,6 +73,11 @@ export const ProductDetails = async (req, res) => {
 
 export const ProductReviewsList= async (req, res) => {
     const result = await ReviewsListService(req);
+    res.json(result);
+}
+
+export const ProductReviewCreate= async (req, res) => {
+    const result = await ProductReviewCreateService(req);
     res.json(result);
 }
 

@@ -286,9 +286,29 @@ export const ReviewsListService = async (req) => {
         return {status: "Success", data: data};
     }catch(e) {
         console.log(e);
-        return {status: "Success", message: "Internal server error..!"}
+        return {status: "Error", message: "Internal server error..!"}
     }
 }
+
+export const ProductReviewCreateService = async (req) => {
+    try {
+
+        const userID = new ObjectId(req.headers.user_id);
+        const {productID, des, rating} =req.body;
+
+
+        // Create Review
+        await ReviewModel.create({productID, userID, des, rating});
  
+
+        return {status: "Success", message: "Review created success"};
+
+    }catch(e) {
+        console.log(e);
+        return {status: "Error", message: "Internal server error..!"}
+    }
+}
+
+
 
  
